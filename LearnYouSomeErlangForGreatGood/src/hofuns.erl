@@ -24,7 +24,10 @@
   maxc/1,
   minc/1,
   sum/1,
-  fold/3
+  fold/3,
+  reverse/1,
+  mapf/2,
+  filterf/2
 ]).
 
 %% Increment values in list
@@ -85,7 +88,7 @@ minc([Head | Tail], Min) when Head < Min -> minc(Tail, Head);
 minc([_ | Tail], Min) -> minc(Tail, Min).
 
 %% Sum
-sum(L) -> sum(L, 0).
+sum(List) -> sum(List, 0).
 
 sum([], Sum) -> Sum;
 sum([Head | Tail], Sum) -> sum(Tail, Head + Sum).
@@ -94,3 +97,21 @@ sum([Head | Tail], Sum) -> sum(Tail, Head + Sum).
 fold(_, Start, []) -> Start;
 fold(Function, Start, [Head | Tail]) ->
   fold(Function, Function(Head, Start), Tail).
+
+%% Reverse with fold
+reverse(List) ->
+  fold(fun(X, Acc) -> [X | Acc] end, [], List).
+
+%% Map with fold
+mapf(Function, List) ->
+  reverse(fold(fun(X, Acc) -> [Function(X) | Acc] end, [], List)).
+
+%% Filter with fold
+filterf(Pred, L) ->
+  Function = fun(X, Acc) ->
+    case Pred(X) of
+      true  -> [X | Acc];
+      false -> Acc
+    end
+  end,
+  reverse(fold(Function, [], L)).
