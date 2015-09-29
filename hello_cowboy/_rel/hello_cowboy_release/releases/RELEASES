@@ -1,0 +1,9 @@
+[{release,"hello_cowboy_release","1","7.0.3",
+          [{kernel,"4.0","./lib/kernel-4.0"},
+           {stdlib,"2.5","./lib/stdlib-2.5"},
+           {ranch,"1.1.0","./lib/ranch-1.1.0"},
+           {crypto,"3.6","./lib/crypto-3.6"},
+           {cowlib,"1.0.1","./lib/cowlib-1.0.1"},
+           {cowboy,"1.0.1","./lib/cowboy-1.0.1"},
+           {hello_cowboy,"rolling","./lib/hello_cowboy-rolling"}],
+          permanent}].
