@@ -16,11 +16,11 @@
 
 sort([]) -> [];
 sort([Head | Tail]) ->
-  { Less, Greater } = partition(Tail, Head, [], []),
+  {Less, Greater} = partition(Tail, Head, [], []),
   sort(Less) ++ [Head] ++ sort(Greater).
 
 partition([], _Pivot, Less, Greater) ->
-  { Less, Greater };
+  {Less, Greater};
 partition([Head | Tail], Pivot, Less, Greater) ->
   case Head > Pivot of
     true  -> partition(Tail, Pivot, Less, Greater ++ [Head] );
