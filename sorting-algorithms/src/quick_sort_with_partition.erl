@@ -23,6 +23,6 @@ partition([], _Pivot, Less, Greater) ->
   {Less, Greater};
 partition([Head | Tail], Pivot, Less, Greater) ->
   case Head > Pivot of
-    true  -> partition(Tail, Pivot, Less, Greater ++ [Head] );
+    true  -> partition(Tail, Pivot, Less, Greater ++ [Head]);
     false -> partition(Tail, Pivot, Less ++ [Head] , Greater)
   end.
