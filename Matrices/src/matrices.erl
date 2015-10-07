@@ -13,7 +13,9 @@
 -export([
   create_clist/1,
   create_inc_clist/1,
-  print_clist/1
+  print_clist/1,
+  modify_inc/1,
+  modify_dec/1
 ]).
 
 %% Create coordinates list
@@ -44,3 +46,19 @@ create_inc_clist(N, 0, Size, X, List) ->
   create_inc_clist(N - 1, Size, Size, X, List);
 create_inc_clist(N, M, Size, X, List) ->
   create_inc_clist(N, M - 1, Size, X - 1, [{N - 1, M - 1, X} | List]).
+
+%% Modify incrementally coordinates list
+modify_inc(List) -> modify_inc(lists:reverse(List), length(List), []).
+
+modify_inc([{N, M, _Value} | Tail], X, Result) ->
+  modify_inc(Tail, X - 1, [{N, M, X} | Result]);
+modify_inc([], 0, Result) ->
+  Result.
+
+%% Modify decrementally coordinates list
+modify_dec(List) -> lists:reverse(modify_dec(List, length(List), [])).
+
+modify_dec([{N, M, _Value} | Tail], X, Result) ->
+  modify_inc(Tail, X - 1, [{N, M, X} | Result]);
+modify_dec([], 0, Result) ->
+  Result.
