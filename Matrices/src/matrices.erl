@@ -50,15 +50,15 @@ create_inc_clist(N, M, Size, X, List) ->
 %% Modify incrementally coordinates list
 modify_inc(List) -> modify_inc(lists:reverse(List), length(List), []).
 
-modify_inc([{N, M, _Value} | Tail], X, Result) ->
-  modify_inc(Tail, X - 1, [{N, M, X} | Result]);
 modify_inc([], 0, Result) ->
   Result.
+modify_inc([{N, M, _Value} | Tail], X, Result) ->
+  modify_inc(Tail, X - 1, [{N, M, X} | Result]);
 
 %% Modify decrementally coordinates list
 modify_dec(List) -> lists:reverse(modify_dec(List, length(List), [])).
 
-modify_dec([{N, M, _Value} | Tail], X, Result) ->
-  modify_inc(Tail, X - 1, [{N, M, X} | Result]);
 modify_dec([], 0, Result) ->
   Result.
+modify_dec([{N, M, _Value} | Tail], X, Result) ->
+  modify_inc(Tail, X - 1, [{N, M, X} | Result]);
